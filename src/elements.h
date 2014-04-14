@@ -1,6 +1,6 @@
 #define SETTINGS_KEY 0
 #define NUM_MENU_SECTIONS 4
-#define NUM_FIRST_MENU_ITEMS 4
+#define NUM_FIRST_MENU_ITEMS 5
 #define NUM_SECOND_MENU_ITEMS 1
 #define NUM_THIRD_MENU_ITEMS 1
 #define NUM_FOURTH_MENU_ITEMS 3
@@ -15,6 +15,7 @@ typedef struct persist{
 	uint8_t previousHour;
 	uint8_t previousMin;
 	uint8_t previousSec;
+	int animationSpeed;
 }__attribute__((__packed__)) persist;
 
 persist settings = {
@@ -27,6 +28,7 @@ persist settings = {
 	.previousHour = 0,
 	.previousMin = 1,
 	.previousSec = 0,
+	.animationSpeed = 0,
 };
 
 Window *window, *menu_window;
@@ -45,7 +47,7 @@ InverterLayer *theme;
 
 static SimpleMenuLayer *options;
 static SimpleMenuSection menu_sections[4];
-static SimpleMenuItem first_menu_items[4];
+static SimpleMenuItem first_menu_items[5];
 static SimpleMenuItem second_menu_items[1];
 static SimpleMenuItem third_menu_items[1];
 static SimpleMenuItem fourth_menu_items[3];
@@ -76,7 +78,7 @@ int intervalSec = 0;
 int desText, running, running_stopwatch, flash, ended, valueRead, valueWritten;
 bool initialScreen = 1;
 bool setHour, setMinute, setSecond, actionBarHidden;
-int animationSpeed = 500;
+int animationSpeed = 600;
 char timeFormatMin[]="999";
 char timeFormatSec[]="00";
 char timerSec[]="00";

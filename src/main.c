@@ -376,7 +376,7 @@ void back(){
 		start_time = 0;
 		elapsed_time = 0;
 	}
-	else if(running == 1 || running == 2){
+	else if(running == 1 || running == 2 || ended == 1){
 		initialScreen = 1;
 		updateActionBar(1);
 		setHour = 0;
@@ -391,6 +391,7 @@ void back(){
 		updateMin();
 		updateSec();
 		updateHour();
+		transition(3, 1);
 		transition(9, 1);
 		transition(7, 1);
 		actionBarAnimate(2);
@@ -1008,6 +1009,28 @@ static void ilovecommunity(int index, void *ctx){
 	layer_mark_dirty(simple_menu_layer_get_layer(options));
 }
 
+void animationspeed_callback(int index, void *ctx){
+	settings.animationSpeed++;
+	if(settings.animationSpeed == 0){
+		first_menu_items[4].subtitle = "Quick (300ms)";
+		animationSpeed = 300;
+	}
+	else if(settings.animationSpeed == 1){
+		first_menu_items[4].subtitle = "Medium (600ms)";
+		animationSpeed = 600;
+	}
+	else if(settings.animationSpeed == 2){
+		first_menu_items[4].subtitle = "Slow (900ms)";
+		animationSpeed = 900;
+	}
+	else if(settings.animationSpeed == 3){
+		settings.animationSpeed = 0;
+		first_menu_items[4].subtitle = "Quick (300ms)";
+		animationSpeed = 300;
+	}
+	layer_mark_dirty(simple_menu_layer_get_layer(options));
+}
+
 static void hideunused_callback(int index, void *ctx){
 	settings.hideUnused++;
 	
@@ -1051,6 +1074,10 @@ void window_load_menu(Window *window){
 		.title = "Hide Unused #s",
 		.callback = hideunused_callback,
 	};
+	first_menu_items[4] = (SimpleMenuItem){
+		.title = "Animation Speed",
+		.callback = animationspeed_callback,
+	};
 
   	second_menu_items[0] = (SimpleMenuItem){
     	.title = "Vibrate",
@@ -1076,7 +1103,7 @@ void window_load_menu(Window *window){
 	};
 	fourth_menu_items[2] = (SimpleMenuItem){
 		.title = "Timer+ Version",
-		.subtitle = "0.6 Stable",
+		.subtitle = "0.7 Stable (Build 2)",
 		.callback = version_callback,
 	};
 
@@ -1182,6 +1209,22 @@ void window_load_menu(Window *window){
 	}
 	else if(settings.stopwatchTimer > 7){
 		third_menu_items[0].subtitle = "Off";
+	}
+	if(settings.animationSpeed == 0){
+		first_menu_items[4].subtitle = "Quick (300ms)";
+		animationSpeed = 300;
+	}
+	else if(settings.animationSpeed == 1){
+		first_menu_items[4].subtitle = "Medium (600ms)";
+		animationSpeed = 600;
+	}
+	else if(settings.animationSpeed == 2){
+		first_menu_items[4].subtitle = "Slow (900ms)";
+		animationSpeed = 900;
+	}
+	else{
+		settings.animationSpeed = 0;
+		animationSpeed = 300;
 	}
 	
   	Layer *window_layer = window_get_root_layer(window);
@@ -1373,6 +1416,23 @@ void handle_init(void) {
 		settings.previousHour = 0;
 		settings.previousMin = 1;
 		settings.previousSec = 0;
+	}
+	if(settings.animationSpeed == 0){
+		first_menu_items[4].subtitle = "Quick (300ms)";
+		animationSpeed = 300;
+	}
+	else if(settings.animationSpeed == 1){
+		first_menu_items[4].subtitle = "Medium (600ms)";
+		animationSpeed = 600;
+	}
+	else if(settings.animationSpeed == 2){
+		first_menu_items[4].subtitle = "Slow (900ms)";
+		animationSpeed = 900;
+	}
+	else{
+		settings.animationSpeed = 1;
+		first_menu_items[4].subtitle = "Medium (600ms)";
+		animationSpeed = 600;
 	}
 	window_stack_push(window, true);
 }

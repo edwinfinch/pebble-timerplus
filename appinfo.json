@@ -1,9 +1,9 @@
 {
-    "versionLabel": "0.6",
+    "versionLabel": "0.7",
     "uuid": "0c085389-48a9-40e8-b15c-bd8bc140f3da",
     "appKeys": {},
     "longName": "Timer Plus",
-    "versionCode": 8,
+    "versionCode": 9,
     "capabilities": [
         ""
     ],
