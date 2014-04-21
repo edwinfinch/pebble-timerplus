@@ -1,74 +1,20 @@
 {
-    "versionLabel": "0.7",
-    "uuid": "0c085389-48a9-40e8-b15c-bd8bc140f3da",
     "appKeys": {},
-    "longName": "Timer Plus",
-    "versionCode": 9,
     "capabilities": [
         ""
     ],
-    "shortName": "Timer+",
+    "uuid": "0c085389-48a9-40e8-b15c-bd8bc140f3da",
+    "versionLabel": "0.7.1",
+    "longName": "Timer Plus",
     "companyName": "Edwin Finch",
-    "watchapp": {
-        "watchface": false
-    },
+    "versionCode": 10,
     "resources": {
         "media": [
-            {
-                "type": "png",
-                "name": "IMAGE_LAP",
-                "file": "images/lap.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_STOPWATCH",
-                "file": "images/stopwatch.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_TIMER",
-                "file": "images/timer.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_SETTINGS",
-                "file": "images/settings.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_STOP",
-                "file": "images/stop.png"
-            },
             {
                 "menuIcon": true,
                 "type": "png",
                 "name": "MENU_ICON",
                 "file": "images/icon.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_RESTART",
-                "file": "images/restart.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_RESUME",
-                "file": "images/play.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_PAUSE",
-                "file": "images/pause.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_CHECKMARK",
-                "file": "images/checkmark.png"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_NEXT",
-                "file": "images/arrow_next.png"
             },
             {
                 "type": "png",
@@ -79,7 +25,61 @@
                 "type": "png",
                 "name": "IMAGE_PLUS",
                 "file": "images/action_icon_plus.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_PAUSE",
+                "file": "images/pause.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_RESUME",
+                "file": "images/play.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_NEXT",
+                "file": "images/arrow_next.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_CHECKMARK",
+                "file": "images/checkmark.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_RESTART",
+                "file": "images/restart.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_STOP",
+                "file": "images/stop.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_SETTINGS",
+                "file": "images/settings.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_TIMER",
+                "file": "images/timer.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_STOPWATCH",
+                "file": "images/stopwatch.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_LAP",
+                "file": "images/lap.png"
             }
         ]
-    }
+    },
+    "watchapp": {
+        "watchface": false
+    },
+    "shortName": "Timer+"
 }

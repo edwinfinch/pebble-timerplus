@@ -12,10 +12,7 @@ typedef struct persist{
 	bool hideStatusBar;
 	uint8_t hideUnused;
 	uint8_t stopwatchTimer; 
-	uint8_t previousHour;
-	uint8_t previousMin;
-	uint8_t previousSec;
-	int animationSpeed;
+	uint8_t animationSpeed;
 }__attribute__((__packed__)) persist;
 
 persist settings = {
@@ -25,9 +22,6 @@ persist settings = {
 	.hideStatusBar = 0,
 	.hideUnused = 0,
 	.stopwatchTimer = 0,
-	.previousHour = 0,
-	.previousMin = 1,
-	.previousSec = 0,
 	.animationSpeed = 0,
 };
 
@@ -52,7 +46,6 @@ static SimpleMenuItem second_menu_items[1];
 static SimpleMenuItem third_menu_items[1];
 static SimpleMenuItem fourth_menu_items[3];
 
-static bool special_flag = false;
 bool stopVibe, hideStatusBar;
 
 int sw_seconds = 0;
@@ -61,8 +54,6 @@ int sw_hours = 0;
 
 int lapSec, lapMin, lapHour;
 double lap_time, now, elapsed_time, start_time;
-
-static int hit_count = 0;
 
 typedef struct mytimer_struct {
     int16_t min;

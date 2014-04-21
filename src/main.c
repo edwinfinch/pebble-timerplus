@@ -8,12 +8,13 @@ Extra credits:
 Animated action bars from pedrolane (big thanks!): https://github.com/gregoiresage/pebble_animated_actionbar
 Idea credit to a resturant napkin and a late night hackathon
 
+#savegreendale
 #sixseasonsandamovie
 */
 
 #include <pebble.h>
 #include "elements.h"
-	
+
 void animate_layer(Layer *layer, GRect *start, GRect *finish, int duration, int delay);
 void tick_handler(struct tm *tick_time, TimeUnits units_changed);	
 void window_load_menu(Window *menu_window);
@@ -29,6 +30,7 @@ double float_time_ms() {
 	return (double)seconds + ((double)milliseconds / 1000.0);
 }
 
+//Separate function to update action bar icons, much cleaner
 void updateActionBar(int set){
 	if(set == 1){
 		action_bar_layer_set_icon(main_action_bar, BUTTON_ID_UP, actionIconTimer);
@@ -52,6 +54,7 @@ void updateActionBar(int set){
 	}
 }
 
+//Running an outdated version of animation action bar, so these are here with no current purpose
 static void animation_started(Animation *animation, void *data) {
   
 }
@@ -60,11 +63,15 @@ static void animation_stopped(Animation *animation, bool finished, void *data) {
 
 }
 
+//Destroy the animation
 static void destroy_property_animation(PropertyAnimation **prop_animation) {
+	//If it's null
   if (*prop_animation == NULL) {
+	  //return
     return;
   }
 
+	//if an animation is scheduled, unschedule it
   if (animation_is_scheduled((Animation*) *prop_animation)) {
     animation_unschedule((Animation*) *prop_animation);
   }
@@ -73,6 +80,7 @@ static void destroy_property_animation(PropertyAnimation **prop_animation) {
   *prop_animation = NULL;
 }
 
+//Where the magic happens
 void actionBarAnimate(int i){
 	GRect to_rect = layer_get_bounds(action_bar_layer_get_layer(main_action_bar));
 	int delay = 3000;
@@ -104,6 +112,7 @@ void actionBarAnimate(int i){
   		animation_schedule((Animation*) prop_animation);
 }
 
+//Update the text of the description layer
 void updateDesText(int i){
 	if(i == 1){
 		text_layer_set_text(des_text_layer, "Seconds");
@@ -131,6 +140,7 @@ void updateDesText(int i){
 	}
 }
 
+//When the time is up, vibrate according to the setting
 void timeIsUp(){
 	if(settings.vibrate == 1){
 		vibes_short_pulse();
@@ -141,12 +151,13 @@ void timeIsUp(){
 	else if(settings.vibrate == 3){
 		vibes_long_pulse();
 	}
+	//Reshow the action bar
 	actionBarAnimate(2);
 }
 
 void transition(int transNum, bool alt){
 	//I'm sure there's a more efficient way to handle transitions but right now function > clean code
-	//If alt is true, that means invert the transition.
+	//If alt is true, that means invert the transition. This is generally only used for backing out.
 	if(transNum == 1){
 		start = GRect(0, 40, 144, 168);
 		finish = GRect(-120, 40, 144, 168);
@@ -328,8 +339,10 @@ void transition(int transNum, bool alt){
 	}
 }
 
+//If back button pushed
 void back(){
 	if(initialScreen == 1){
+		//POP POP! top window
 		window_stack_pop(true);
 		APP_LOG(APP_LOG_LEVEL_INFO, "Timer+: popping top window...");
 	}
@@ -407,9 +420,6 @@ void timer_fire(int minutes, int seconds, int hours){
 	timerData.sec = seconds;
 	timerData.min = minutes;
 	timerData.hour = hours;
-	settings.previousSec = seconds;
-	settings.previousMin = minutes;
-	settings.previousHour = hours;
 	desText = 4;
 	running = 1;
 	stopVibe = 0;
@@ -1103,7 +1113,7 @@ void window_load_menu(Window *window){
 	};
 	fourth_menu_items[2] = (SimpleMenuItem){
 		.title = "Timer+ Version",
-		.subtitle = "0.7 Stable (Build 2)",
+		.subtitle = "0.7.1 Stable Build 3a",
 		.callback = version_callback,
 	};
 
@@ -1288,14 +1298,14 @@ void window_load(Window *window){
 	seconds_text_layer = textLayerInit(GRect(160, 100, 144, 168), GColorBlack, GColorClear, GTextAlignmentCenter, 3);
 	hours_text_layer = textLayerInit(GRect(160, 100, 144, 168), GColorBlack, GColorClear, GTextAlignmentCenter, 3);
 	lap_text_layer = textLayerInit(GRect(160, 100, 144, 50), GColorBlack, GColorWhite, GTextAlignmentCenter, 3);
-	intervalMin = settings.previousMin;
-	intervalSec = settings.previousSec;
-	intervalHour = settings.previousHour;
-	snprintf(timeFormatMin, sizeof(timeFormatMin), "%d", settings.previousMin);
+	intervalMin = 1;
+	intervalSec = 0;
+	intervalHour = 0;
+	snprintf(timeFormatMin, sizeof(timeFormatMin), "%d", intervalMin);
 	text_layer_set_text(min_text_layer, timeFormatMin);
-	snprintf(timeFormatSec, sizeof(timeFormatSec), "%d", settings.previousSec);
+	snprintf(timeFormatSec, sizeof(timeFormatSec), "%d", intervalSec);
 	text_layer_set_text(sec_text_layer, timeFormatSec);
-	snprintf(timeFormatHour, sizeof(timeFormatHour), "%d", settings.previousHour);
+	snprintf(timeFormatHour, sizeof(timeFormatHour), "%d", intervalHour);
 	text_layer_set_text(hour_text_layer, timeFormatHour);
 	text_layer_set_text(des_text_layer, "Hours");
 	text_layer_set_text(option_text_layer1, "Timer");
@@ -1413,9 +1423,6 @@ void handle_init(void) {
 		settings.hideStatusBar = 0;
 		settings.hideUnused = 0;
 		settings.stopwatchTimer = 0;
-		settings.previousHour = 0;
-		settings.previousMin = 1;
-		settings.previousSec = 0;
 	}
 	if(settings.animationSpeed == 0){
 		first_menu_items[4].subtitle = "Quick (300ms)";
@@ -1440,8 +1447,6 @@ void handle_init(void) {
 void handle_deinit(void) {
 	valueWritten = persist_write_data(SETTINGS_KEY, &settings, sizeof(settings));
 	APP_LOG(APP_LOG_LEVEL_INFO, "%d bytes written to settings.", valueWritten);
-  	text_layer_destroy(min_text_layer);
-	text_layer_destroy(sec_text_layer);
   	window_destroy(window);
 	window_destroy(menu_window);
 }
