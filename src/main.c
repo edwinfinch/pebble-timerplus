@@ -1009,7 +1009,7 @@ static void thanks(int index, void *ctx){
 }
 
 static void version_callback(int index, void *ctx){
-	fourth_menu_items[2].subtitle = "Thanks for using :)";
+	fourth_menu_items[2].subtitle = "Updated June 12th, '14";
 	layer_mark_dirty(simple_menu_layer_get_layer(options));
 }
 
