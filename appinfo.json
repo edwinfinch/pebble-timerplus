@@ -1,85 +1,85 @@
 {
-    "appKeys": {},
-    "capabilities": [
-        ""
-    ],
-    "uuid": "0c085389-48a9-40e8-b15c-bd8bc140f3da",
-    "versionLabel": "0.7.1",
-    "longName": "Timer Plus",
-    "companyName": "Edwin Finch",
-    "versionCode": 10,
     "resources": {
         "media": [
             {
-                "menuIcon": true,
+                "file": "images/timerplus_072_icon.png",
                 "type": "png",
                 "name": "MENU_ICON",
-                "file": "images/icon.png"
+                "menuIcon": true
             },
             {
+                "file": "images/action_icon_minus.png",
                 "type": "png",
-                "name": "IMAGE_MINUS",
-                "file": "images/action_icon_minus.png"
+                "name": "IMAGE_MINUS"
             },
             {
+                "file": "images/action_icon_plus.png",
                 "type": "png",
-                "name": "IMAGE_PLUS",
-                "file": "images/action_icon_plus.png"
+                "name": "IMAGE_PLUS"
             },
             {
+                "file": "images/pause.png",
                 "type": "png",
-                "name": "IMAGE_PAUSE",
-                "file": "images/pause.png"
+                "name": "IMAGE_PAUSE"
             },
             {
+                "file": "images/play.png",
                 "type": "png",
-                "name": "IMAGE_RESUME",
-                "file": "images/play.png"
+                "name": "IMAGE_RESUME"
             },
             {
+                "file": "images/arrow_next.png",
                 "type": "png",
-                "name": "IMAGE_NEXT",
-                "file": "images/arrow_next.png"
+                "name": "IMAGE_NEXT"
             },
             {
+                "file": "images/checkmark.png",
                 "type": "png",
-                "name": "IMAGE_CHECKMARK",
-                "file": "images/checkmark.png"
+                "name": "IMAGE_CHECKMARK"
             },
             {
+                "file": "images/restart.png",
                 "type": "png",
-                "name": "IMAGE_RESTART",
-                "file": "images/restart.png"
+                "name": "IMAGE_RESTART"
             },
             {
+                "file": "images/stop.png",
                 "type": "png",
-                "name": "IMAGE_STOP",
-                "file": "images/stop.png"
+                "name": "IMAGE_STOP"
             },
             {
+                "file": "images/settings.png",
                 "type": "png",
-                "name": "IMAGE_SETTINGS",
-                "file": "images/settings.png"
+                "name": "IMAGE_SETTINGS"
             },
             {
+                "file": "images/timer.png",
                 "type": "png",
-                "name": "IMAGE_TIMER",
-                "file": "images/timer.png"
+                "name": "IMAGE_TIMER"
             },
             {
+                "file": "images/stopwatch.png",
                 "type": "png",
-                "name": "IMAGE_STOPWATCH",
-                "file": "images/stopwatch.png"
+                "name": "IMAGE_STOPWATCH"
             },
             {
+                "file": "images/lap.png",
                 "type": "png",
-                "name": "IMAGE_LAP",
-                "file": "images/lap.png"
+                "name": "IMAGE_LAP"
             }
         ]
     },
+    "uuid": "0c085389-48a9-40e8-b15c-bd8bc140f3da",
+    "versionCode": 10,
+    "companyName": "Edwin Finch",
+    "appKeys": {},
     "watchapp": {
         "watchface": false
     },
+    "versionLabel": "0.7.2",
+    "capabilities": [
+        ""
+    ],
+    "longName": "Timer Plus",
     "shortName": "Timer+"
 }
