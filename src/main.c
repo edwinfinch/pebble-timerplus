@@ -1113,7 +1113,7 @@ void window_load_menu(Window *window){
 	};
 	fourth_menu_items[2] = (SimpleMenuItem){
 		.title = "Timer+ Version",
-		.subtitle = "0.7.1 Stable Build 3a",
+		.subtitle = "0.7.2 Stable Build 2a",
 		.callback = version_callback,
 	};
 
